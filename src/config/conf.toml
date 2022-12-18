@@ -1,0 +1,7 @@
+[program]
+verify_file_presence = true
+
+[defaults]
+language = "en.toml"
+
+[game]
