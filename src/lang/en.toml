@@ -1,0 +1,14 @@
+[meta]
+author = "R1DF"
+dateCreated = [18, 12, 2022]
+description = "The official, preinstalled language pack for The Differentiation Quiz."
+forVersion = "1.0.0"
+
+[exceptionHandling]
+anErrorOccurredText = "An error occurred while running the program:"
+couldNotLocateText = "Could not locate a necessary module to import."
+couldNotImportText = "Could not import a class or a function from a module."
+exceptionMessageFilledText = "Exception message: [EXCEPTION]"
+ModuleNotFoundErrorText = "[ModuleNotFoundError]"
+ImportErrorText = "[ImportError]"
+pleaseReinstallText = "Please reinstall the game."
