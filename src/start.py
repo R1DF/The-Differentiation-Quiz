@@ -1,5 +1,3 @@
-
-
 if __name__ == "__main__":
     # Imports + starting exception handling (exception handler messages default to English)
     try:
@@ -9,6 +7,7 @@ if __name__ == "__main__":
         from config_loader import Configurations
         from lang_loader import LanguagePack
         from main import TheDifferentiationQuiz
+        colorama.init()
 
         configurations = Configurations(os.path.join("config", "conf.toml"))
         language = LanguagePack(os.path.join("lang", configurations.defaults["language"]))
@@ -28,5 +27,7 @@ if __name__ == "__main__":
               f"[LANGUAGE DEFAULTED TO ENGLISH]\n")
         sys.exit()
 
-    differentiation_quiz = TheDifferentiationQuiz()  # Starts the program
-
+    try:
+        differentiation_quiz = TheDifferentiationQuiz(configurations, language)  # Starts the program
+    except KeyboardInterrupt:
+        sys.exit()
