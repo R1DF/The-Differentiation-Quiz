@@ -9,3 +9,6 @@ class LanguagePack:
     def section_get(self, section):
         return self.data[section]
 
+    def menu_get(self, menu):
+        return self.data["menus"][menu]
+
