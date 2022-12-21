@@ -4,6 +4,17 @@ dateCreated = [18, 12, 2022]
 description = "The official, preinstalled language pack for The Differentiation Quiz."
 forVersion = "1.0.0"
 
+[multipleUse]
+closedQuestionAnswers = [
+    "Yes",
+    "No"
+]
+
+pressToContinue = "Press any key to continue..."
+pressToExit = "Press any key to exit..."
+enterToContinue = "Press Enter to continue..."
+enterToExit = "Press Enter to exit..."
+
 [exceptionHandling]
 anErrorOccurredText = "An error occurred while running the program:"
 couldNotLocateText = "Could not locate a necessary module to import."
@@ -12,3 +23,16 @@ exceptionMessageFilledText = "Exception message: [EXCEPTION]"
 ModuleNotFoundErrorText = "[ModuleNotFoundError]"
 ImportErrorText = "[ImportError]"
 pleaseReinstallText = "Please reinstall the game."
+
+[menus]
+[menus.mainMenu]
+welcomeText = "Welcome to The Differentiation Quiz."
+runningVersionText = "Running version v[VERSION]."
+doWhatQueryText = "Please select an option:"
+doWhatQueryChoices = [
+    "Play",
+    "Settings",
+    "Check for updates",
+    "Quit"
+]
+confirmQuitQuery = "Are you sure you want to quit?"
