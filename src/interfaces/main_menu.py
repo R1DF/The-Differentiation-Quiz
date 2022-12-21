@@ -1,0 +1,29 @@
+# Imports
+import questionary
+import sys
+from .base import InterfaceCL
+from utils.text import get_language_entry, combine_language_entries, get_language_confirmation, break_line
+from utils.system import clear
+
+# Main menu
+class MainMenuInterfaceCL(InterfaceCL):
+    def __init__(self, master, language_section_name):
+        super().__init__(master, language_section_name)
+
+    def load_interface(self):
+        print(get_language_entry(self, "welcomeText"))
+        print(get_language_entry(self, "runningVersionText").replace("[VERSION]", self.master.VERSION))
+        break_line()
+
+        options_choices = get_language_entry(self, "doWhatQueryChoices")
+        selected_option = options_choices.index(questionary.select(
+            get_language_entry(self, "doWhatQueryText"),
+            choices=options_choices
+        ).unsafe_ask())
+
+        match selected_option:
+            case 3:
+                break_line()
+                if get_language_confirmation(self, "confirmQuitQuery"):
+                    sys.exit()
+
