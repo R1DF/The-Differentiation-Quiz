@@ -1,9 +1,10 @@
 # Imports
 from term import Term
 
+
 # Expression base
 class Expression:
-    def __init__(self, terms=None):
+    def __init__(self, terms: list[Term] = None):
         self.terms = terms if terms is not None else []  # Using mutable default arguments is a blunder
 
     def add_term(self, coefficient, power):
@@ -28,13 +29,11 @@ class Expression:
         return visualized[0 if visualized[0] == "-" else 2:-1]
 
     def clean_up(self):
-        """Removes all terms that are equal to 0."""
+        """Removes all terms that are equal to 0. Returns self as an updated list if it needs to be saved."""
         self.terms = [x for x in self.terms if x.coefficient != 0]
+        return self
 
     def differentiated(self):
         """Returns an Expression() object which has all the terms differentiated."""
-        new_expression = Expression()
-        new_expression.terms = [x.differentiated() for x in self.terms]
-        new_expression.clean_up()  # Remove any zeroes
-        return new_expression
+        return Expression([x.differentiated() for x in self.terms]).clean_up()  # Cleaned up to remove any zeroes
 
