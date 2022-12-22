@@ -4,7 +4,7 @@ Term objects have a coefficient and power value attached to themselves.
 class Term:
     def __init__(self, coefficient=1.0, power=1.0):
         self.coefficient = coefficient
-        self.power = power if coefficient != 0 else 1
+        self.power = power if coefficient != 0 else 1.0
 
     def visualize(self):
         """Gets string representation of the Term object. (e.g. 12, 5x, 2x^2, etc)"""
@@ -16,7 +16,7 @@ class Term:
             return str(self.coefficient)
 
     def visualize_no_sign(self):
-        """visualize() but omits the sign. Returns sign() of the term."""
+        """visualize() but omits the sign. Also returns the sign() value of the term."""
         if (visualized := self.visualize())[0] == "-":
             return visualized[1:], -1
         else:
