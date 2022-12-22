@@ -1,4 +1,7 @@
-.idea/
-.xml
-.iml
-.txt
+*.idea/
+*.xml
+*.iml
+*.txt
+
+# I do tests of specific game elements and you do not need to see them at all
+/src/tests.py
