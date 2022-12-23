@@ -8,6 +8,7 @@ Please run start.py if you want to play via source.
 
 # Imports
 from interfaces.main_menu import MainMenuInterfaceCL
+from interfaces.game_setup import GameSetupInterfaceCL
 from utils.system import title, clear
 from config_loader import Configurations
 from lang_loader import LanguagePack
@@ -19,4 +20,12 @@ class TheDifferentiationQuiz:
         self.configurations = configurations
         self.language_pack = language_pack
         title(f"The Differentiation Quiz [{TheDifferentiationQuiz.VERSION}]")
-        self.main_menu = MainMenuInterfaceCL(self, "mainMenu")
+        self.current_menu = None
+        self.make_main_menu()
+
+    def make_main_menu(self):
+        self.current_menu = MainMenuInterfaceCL(self, "mainMenu")
+        del self.current_menu  # I'm unsure if using "del" kills the class object so they aren't being redefined yet saved but whatever
+
+    def make_game_setup_menu(self):
+        self.current_menu = GameSetupInterfaceCL(self, "gameSetup")
