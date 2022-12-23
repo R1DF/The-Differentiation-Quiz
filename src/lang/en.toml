@@ -36,3 +36,46 @@ doWhatQueryChoices = [
     "Quit"
 ]
 confirmQuitQuery = "Are you sure you want to quit?"
+
+[menus.gameSetup]
+difficultiesText = "Please look at the difficulties and their descriptions below before choosing one."
+easyDifficultyDescription = """
+Easy
+- Powers only with natural numbers involved.
+- Maximum amount of terms: 3.
+- Questions can be skipped (won't count as correct).
+- 10 questions.
+"""
+
+mediumDifficultyDescription = """
+Medium
+- Whole powers involved (can be negative).
+- Maximum amount of terms: 5.
+- 3 skips allowed.
+- Second order derivatives may appear.
+- 13 questions.
+"""
+
+hardDifficultyDescription = """
+Hard
+- Any real power can be involved (negatives, decimals, or both included).
+- Maximum amount of terms: 6.
+- No skips allowed.
+- Third order derivatives may appear.
+- Notation related questions appear.
+- 15 questions.
+"""
+
+difficultiesQueryText = "Select difficulty:"
+difficultiesQueryChoices = [
+    "Easy",
+    "Medium",
+    "Hard",
+    "Cancel"
+]
+
+[menus.game]
+firstOrderDerivativeQuestionText = "What is the derivative of the following function:"
+secondOrderDerivativeQuestionText = "What is the second-order derivative of the following function:"
+thirdOrderDerivativeQuestionText = "What is the third-order derivative of the following function:"
+isCorrectlQuestionText = "Are the following equations correct?"
