@@ -29,6 +29,10 @@ class Term:
         else:
             return Term(0, 0)  # Empty term (represented as 0)
 
+    def copy(self):
+        """Returns Term instance with the same coefficient and power."""
+        return Term(coefficient=self.coefficient, power=self.power)
+
     def _integrated(self):
         """UNUSED @ V1.0.0: Integrates using power rule. (integral of x^n = x^(n+1) / n + 1) [without the + C]"""
         try:
