@@ -7,6 +7,9 @@ class Expression:
     def __init__(self, terms: list[Term] = None):
         self.terms = terms if terms is not None else []  # Using mutable default arguments is a blunder
 
+    def degree(self):
+        return max(self.terms, key=lambda term: term.power).power   # Returns the degree of the polynomial (e.g. x^2 is highest power -> 2)
+
     def add_term(self, coefficient, power):
         """Adds a term object."""
         self.terms.append(Term(coefficient=coefficient, power=power if coefficient != 0 else 1))
@@ -37,3 +40,25 @@ class Expression:
         """Returns an Expression() object which has all the terms differentiated."""
         return Expression([x.differentiated() for x in self.terms]).clean_up()  # Cleaned up to remove any zeroes
 
+    def copy(self):
+        """Returns another Expression instance with the same terms"""
+        return Expression([x.copy() for x in self.terms])  # Returns copy of itself
+
+    def pseudocopy(self):
+        """copy() but the Terms inside are the same as the original term. Do not use unless you know what you're doing."""
+        return Expression([x for x in self.terms])
+
+    # def same(self, other_expression):
+    #     """Checks if the expression contains the exact same terms with the given one."""
+    #     self_terms_copied = self.get_sorted()
+    #     other_terms_sorted = other_expression.get_sorted()
+    #
+    #     if len(self_terms_copied) != len(other_terms_sorted):
+    #         return False
+    #
+    #     for term_index, term in enumerate(self_terms_copied):
+    #         other_term = other_terms_sorted[term_index]
+    #         if term.coefficient != other_term.coefficient or term.power != other_term.power:
+    #             return False
+    #
+    #     return True
