@@ -11,6 +11,7 @@ class MainMenuInterfaceCL(InterfaceCL):
         super().__init__(master, language_section_name)
 
     def load_interface(self):
+        clear()
         print(get_language_entry(self, "welcomeText"))
         print(get_language_entry(self, "runningVersionText").replace("[VERSION]", self.master.VERSION))
         break_line()
@@ -22,8 +23,14 @@ class MainMenuInterfaceCL(InterfaceCL):
         ).unsafe_ask())
 
         match selected_option:
+            case 0:
+                self.master.make_game_setup_menu()
+                return
+
             case 3:
                 break_line()
                 if get_language_confirmation(self, "confirmQuitQuery"):
                     sys.exit()
+
+        self.load_interface()  # If the code doesn't break up from there then the menu will re-load
 
