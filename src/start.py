@@ -31,3 +31,4 @@ if __name__ == "__main__":
         differentiation_quiz = TheDifferentiationQuiz(configurations, language)  # Starts the program
     except KeyboardInterrupt:
         sys.exit()
+
