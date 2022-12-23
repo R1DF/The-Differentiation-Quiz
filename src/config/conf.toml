@@ -1,5 +1,6 @@
 [program]
 verify_file_presence = true
+safe_start = true
 
 [defaults]
 language = "en.toml"
