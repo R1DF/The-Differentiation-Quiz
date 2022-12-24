@@ -13,13 +13,15 @@ class Question:
     # Modifications functions (Every modification is a list with 4 elements that are all useful in some way)
     def get_modifications(self, maximum_modifications_amount=3):
         modifications = []
-        burner_expression = self.answers[0].pseudocopy()
+        if self.question_type == 2:
+            differentiated_expression = self.involved_expression.differentiated()  # If the list of answers has bools then a new differentiated form must be made
+        burner_expression = self.answers[0].pseudocopy() if self.question_type == 1 else differentiated_expression.pseudocopy()
         for modification in range(maximum_modifications_amount):
             if not len(burner_expression.terms):
                 break
             term = random.choice(burner_expression.terms)
             modifications.append([
-                self.answers[0].terms.index(term),  # Index of the term, using the correct answer as the burner is modified every rotation
+                self.answers[0].terms.index(term) if self.question_type == 1 else differentiated_expression.terms.index(term),  # Index of the term, using the correct answer as the burner is modified every rotation
                 random.randint(1, 2),  # 1 - Coefficient, 2 - Power
                 random.choice([(random.randint(-3, -1)), random.randint(1, 3)]),  # Modifier,
                 term.power
@@ -79,14 +81,13 @@ class Question:
             single_quote_character = "\'"
             notation_in_question = f"{function_name}{order * single_quote_character if order <= 3 else f'({order})'}(x)"
         else:
-            notation_in_question = f"d{function_name}{f'^{order}' if order > 1 else ''}/dx{f'^{order}' if order > 1 else ''}"
+            notation_in_question = f"d{f'^{order}' if order > 1 else ''}{function_name}/dx{f'^{order}' if order > 1 else ''}"
         return f"{notation_in_question} = {expression.visualize()}"
 
     # Generates question based on its type
     def generate(self, minimum_amount_of_terms, allow_negative_powers, allow_decimal_powers):
         used_powers = list(range(minimum_amount_of_terms - 5, minimum_amount_of_terms + 5))
         # Building the expression
-
         for term in range(random.randint(2, minimum_amount_of_terms)):
             power = random.choice(used_powers)
             self.involved_expression.add_term(coefficient=random.randint(1, 6) * random.choice((1, 1, -1 if allow_negative_powers else 1)), power=power)
@@ -108,16 +109,18 @@ class Question:
                 for wrong_answer_index in range(3):
                     self.apply_modifications(modifications[-1], self.answers[wrong_answer_index + 1])
                     modifications.append(self.alter_modifications(modifications[-1], modifications))
+                    self.answers[wrong_answer_index + 1].clean_up()
 
             case 2:   # Question type 2: Check if given derivative is correct
                 # Getting answer
                 self.answers = [True, False][::random.choice((1, -1))]  # sneaky way to randomize this list
+                self.involved_question = [self.involved_expression.visualize()]
                 appearing_expression = self.involved_expression.differentiated()
 
                 if self.answers[1]:  # If the answer IS NOT supposed to be correct
                     # Modifying terms
                     self.apply_modifications(self.get_modifications(2), appearing_expression)
-                self.involved_question = appearing_expression.visualize()
+                self.involved_question.append(appearing_expression.visualize())
 
             case 3:   # Question type 3: Find correct notation and order of derivative
                 # Getting notation for the question and the derivative
@@ -129,14 +132,18 @@ class Question:
                 self.involved_question = f"{function_symbol}{'(x)' if use_lagrange_notation else ''} = {self.involved_expression.visualize()}"
 
                 # Making correct answer
-                orders_available = list(range(1, self.involved_expression.degree() + 1))
+                orders_available = {str(order): [] for order in list(range(1, self.involved_expression.degree() + 1))}
+                # orders_available = list(range(1, self.involved_expression.degree() + 1))
                 self.answers = [self.visualize_with_notation(function_symbol, appearing_expression, use_lagrange_notation, order)]
-                orders_available.remove(order)
+                orders_available[str(order)].append("lagrange" if use_lagrange_notation else "leibniz")  # Lagrange: f'(x), Leibniz: dy/dx
+                # Orders are stored in a dict with a value of 2 lists for every order (to track if 1 notation or 2 have been used)
 
+                # Creation of wrong notations
                 for wrong_answer_number in range(3):
-                    random_order = random.choice(orders_available)
+                    random_order = random.choice(list({str(key): value for key, value in orders_available.items() if len(value) != 2}.keys()))
+                    use_lagrange_notation_in_wrong_answer = random.choice((True, False)) if not orders_available[random_order] else orders_available[random_order][0] == "leibniz"
                     self.answers.append(
-                        self.visualize_with_notation(function_symbol, appearing_expression, use_lagrange_notation if random.randint(1, 80) <= 70 else not use_lagrange_notation, random_order)
+                        self.visualize_with_notation(function_symbol, appearing_expression, use_lagrange_notation_in_wrong_answer, int(random_order))
                     )
-                    orders_available.remove(random_order)
+                    orders_available[random_order].append("lagrange" if use_lagrange_notation_in_wrong_answer else "leibniz")
 
