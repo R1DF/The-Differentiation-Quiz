@@ -8,6 +8,7 @@ class Expression:
         self.terms = terms if terms is not None else []  # Using mutable default arguments is a blunder
 
     def degree(self):
+        """Returns the power of x of the term with the highest (absolute) value for x (when exponentiated)."""
         return max(self.terms, key=lambda term: term.power).power   # Returns the degree of the polynomial (e.g. x^2 is highest power -> 2)
 
     def add_term(self, coefficient, power):
@@ -32,8 +33,16 @@ class Expression:
         return visualized[0 if visualized[0] == "-" else 2:-1]
 
     def clean_up(self):
-        """Removes all terms that are equal to 0. Returns self as an updated list if it needs to be saved."""
+        """Removes all terms that are equal to 0 and combines like terms. Returns self as an updated list if it needs to be saved."""
         self.terms = [x for x in self.terms if x.coefficient != 0]
+        powers = [term.power for term in self.terms]
+        for power in set(powers):
+            if powers.count(power) > 1:
+                like_terms = [term for term in self.terms if term.power == power]
+                combined_coefficients_sum = sum((term.coefficient for term in like_terms))
+                for term in like_terms:
+                    self.terms.remove(term)
+                self.terms.append(Term(coefficient=combined_coefficients_sum, power=power))
         return self
 
     def differentiated(self):
@@ -48,17 +57,3 @@ class Expression:
         """copy() but the Terms inside are the same as the original term. Do not use unless you know what you're doing."""
         return Expression([x for x in self.terms])
 
-    # def same(self, other_expression):
-    #     """Checks if the expression contains the exact same terms with the given one."""
-    #     self_terms_copied = self.get_sorted()
-    #     other_terms_sorted = other_expression.get_sorted()
-    #
-    #     if len(self_terms_copied) != len(other_terms_sorted):
-    #         return False
-    #
-    #     for term_index, term in enumerate(self_terms_copied):
-    #         other_term = other_terms_sorted[term_index]
-    #         if term.coefficient != other_term.coefficient or term.power != other_term.power:
-    #             return False
-    #
-    #     return True
