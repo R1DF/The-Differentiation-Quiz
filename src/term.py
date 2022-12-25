@@ -23,11 +23,10 @@ class Term:
             return visualized, 1 if visualized != "0" else 0
 
     def differentiated(self):
-        """Differentiates term using power rule. (d/dx of x^n = nx^(n-1) )"""
+        """Differentiates term using power rule. (d/dx of x^n = nx^(n-1) )."""
         if self.power != 0:
-            return Term(coefficient=self.coefficient * self.power, power=self.power-1)
-        else:
-            return Term(0, 0)  # Empty term (represented as 0)
+            return Term(coefficient=self.coefficient * self.power, power=self.power - 1)
+        return Term(0, 0)  # Empty term (represented as 0)
 
     def copy(self):
         """Returns Term instance with the same coefficient and power."""
@@ -39,3 +38,4 @@ class Term:
             return Term(coefficient=self.coefficient / (self.power + 1), power=self.power+1)
         except ZeroDivisionError:
             return None  # ln rule or whatever not planned out for now
+
