@@ -11,6 +11,10 @@ class Expression:
         """Returns the power of x of the term with the highest (absolute) value for x (when exponentiated)."""
         return max(self.terms, key=lambda term: term.power).power   # Returns the degree of the polynomial (e.g. x^2 is highest power -> 2)
 
+    def lowest_power(self):
+        """Returns the term with the lowest power of x in the expression."""
+        return min(self.terms, key=lambda term: term.power).power
+
     def add_term(self, coefficient, power):
         """Adds a term object."""
         self.terms.append(Term(coefficient=coefficient, power=power if coefficient != 0 else 1))
@@ -27,10 +31,13 @@ class Expression:
     def visualize(self):
         """Prints out the string representation of the terms for readable output by the user."""
         visualized = ""
-        for term in self.get_sorted():
-            if term.coefficient != 0:
-                visualized += f"{'- ' if term.coefficient < 0 else '+ '}{term.visualize_no_sign()[0]} "
-        return visualized[0 if visualized[0] == "-" else 2:-1]
+        if self.terms:
+            for term in self.get_sorted():
+                if term.coefficient != 0:
+                    visualized += f"{'- ' if term.coefficient < 0 else '+ '}{term.visualize_no_sign()[0]} "
+            return visualized[0 if visualized[0] == "-" else 2:-1]
+        else:
+            return "0"
 
     def clean_up(self):
         """Removes all terms that are equal to 0 and combines like terms. Returns self as an updated list if it needs to be saved."""
