@@ -8,10 +8,17 @@ class Question:
         self.question_type = question_type
         self.involved_expression = Expression()
         self.involved_question = ""
+        self.minimum_terms_in_question = 2
+        self.power_depth = 2  # Power depth: the higher, the more likely there is a power that is higher than normal
         self.answers = []  # First answer is always correct
 
     # Modifications functions (Every modification is a list with 4 elements that are all useful in some way)
-    def get_modifications(self, maximum_modifications_amount=3):
+    def get_random_coefficient(self, allow_negative=False):
+        generation_range = (1 if not allow_negative else -6, 6)
+        coefficient = random.randint(*generation_range)
+        return coefficient if coefficient != 0 else coefficient + random.choice((-1, 1))
+
+    def get_modifications(self, maximum_modifications_amount=3):  # Creates random modifications
         modifications = []
         if self.question_type == 2:
             differentiated_expression = self.involved_expression.differentiated()  # If the list of answers has bools then a new differentiated form must be made
@@ -29,7 +36,7 @@ class Question:
             burner_expression.terms.remove(term)
         return sorted(modifications, key=lambda x: x[0])
 
-    def apply_modifications(self, modifications, expression):
+    def apply_modifications(self, modifications, expression):   # Applies modifications to expression
         for modifier_value_1, modifier_value_2, modifier_value_3, residue in modifications:
             """
             The values of a modification are ambiguous and that is why the names of the values in the for loop are so vague.
@@ -44,7 +51,7 @@ class Question:
             else:
                 expression.terms[modifier_value_1].power += modifier_value_3
 
-    def alter_modifications(self, modifications, previous):
+    def alter_modifications(self, modifications, previous):  # Changes existing modifications
         new_modifications = modifications.copy()
         skips = 0
         for modification in new_modifications:
@@ -85,12 +92,15 @@ class Question:
         return f"{notation_in_question} = {expression.visualize()}"
 
     # Generates question based on its type
-    def generate(self, minimum_amount_of_terms, allow_negative_powers, allow_decimal_powers):
-        used_powers = list(range(minimum_amount_of_terms - 5, minimum_amount_of_terms + 5))
+    def generate(self, minimum_amount_of_terms, allow_negative_powers):
+        used_powers = list(range(0 if not allow_negative_powers else 0 - self.power_depth, minimum_amount_of_terms + self.power_depth))
         # Building the expression
-        for term in range(random.randint(2, minimum_amount_of_terms)):
+        for term in range(random.randint(self.minimum_terms_in_question, minimum_amount_of_terms)):
             power = random.choice(used_powers)
-            self.involved_expression.add_term(coefficient=random.randint(1, 6) * random.choice((1, 1, -1 if allow_negative_powers else 1)), power=power)
+            self.involved_expression.add_term(
+                coefficient=self.get_random_coefficient(allow_negative_powers),
+                power=power
+            )
             used_powers.remove(power)
         self.involved_expression.sort()
         self.involved_question = self.involved_expression.visualize()
@@ -127,12 +137,12 @@ class Question:
                 use_lagrange_notation = random.choice((True, False))
                 function_symbol = chr(random.choice((random.randint(97, 122), random.randint(65, 90))))
                 appearing_expression = self.involved_expression.copy()
-                for i in range(order := random.randint(1, self.involved_expression.degree())):
+                for i in range(order := random.randint(self.involved_expression.lowest_power(), self.involved_expression.degree())):
                     appearing_expression = appearing_expression.differentiated()
                 self.involved_question = f"{function_symbol}{'(x)' if use_lagrange_notation else ''} = {self.involved_expression.visualize()}"
 
                 # Making correct answer
-                orders_available = {str(order): [] for order in list(range(1, self.involved_expression.degree() + 1))}
+                orders_available = {str(order): [] for order in list(range(self.involved_expression.lowest_power(), self.involved_expression.degree() + 1))}
                 # orders_available = list(range(1, self.involved_expression.degree() + 1))
                 self.answers = [self.visualize_with_notation(function_symbol, appearing_expression, use_lagrange_notation, order)]
                 orders_available[str(order)].append("lagrange" if use_lagrange_notation else "leibniz")  # Lagrange: f'(x), Leibniz: dy/dx
