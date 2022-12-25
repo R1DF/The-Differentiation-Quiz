@@ -44,26 +44,26 @@ Easy
 - Powers only with natural numbers involved.
 - Maximum amount of terms: 3.
 - Questions can be skipped (won't count as correct).
-- 10 questions.
+- 7 questions.
 """
 
 mediumDifficultyDescription = """
 Medium
-- Whole powers involved (can be negative).
+- Whole powers involved.
 - Maximum amount of terms: 5.
 - 3 skips allowed.
 - Second order derivatives may appear.
-- 13 questions.
+- 10 questions.
 """
 
 hardDifficultyDescription = """
 Hard
-- Any real power can be involved (negatives, decimals, or both included).
+- Whole powers involved.
 - Maximum amount of terms: 6.
 - No skips allowed.
 - Third order derivatives may appear.
 - Notation related questions appear.
-- 15 questions.
+- 13 questions.
 """
 
 difficultiesQueryText = "Select difficulty:"
