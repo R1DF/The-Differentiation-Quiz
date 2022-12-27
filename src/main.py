@@ -9,7 +9,9 @@ Please run start.py if you want to play via source.
 # Imports
 from interfaces.main_menu import MainMenuInterfaceCL
 from interfaces.game_setup import GameSetupInterfaceCL
-from utils.system import title, clear
+from interfaces.game_loader import GameLoadingInterfaceCL
+from interfaces.game_interface import GameInterfaceCL
+from utils.system import title
 from config_loader import Configurations
 from lang_loader import LanguagePack
 
@@ -29,3 +31,10 @@ class TheDifferentiationQuiz:
 
     def make_game_setup_menu(self):
         self.current_menu = GameSetupInterfaceCL(self, "gameSetup")
+
+    def make_game_loading_menu(self, difficulty):
+        self.current_menu = GameLoadingInterfaceCL(self, "gameLoading", difficulty)
+
+    def make_game_interface(self, game):
+        self.current_menu = GameInterfaceCL(self, "game", game)
+
