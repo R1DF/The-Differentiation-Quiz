@@ -85,9 +85,9 @@ generationCompleteText = "Question generation complete."
 
 [menus.game]
 questionNumberText = "Question No. [N]"
-firstOrderDerivativeQuestionText = "What is the derivative of the following function?"
-secondOrderDerivativeQuestionText = "What is the second-order derivative of the following function?"
-thirdOrderDerivativeQuestionText = "What is the third-order derivative of the following function?"
+firstOrderDerivativeQuestionText = "What is the derivative of the following expression?"
+secondOrderDerivativeQuestionText = "What is the second-order derivative of the following expression?"
+thirdOrderDerivativeQuestionText = "What is the third-order derivative of the following expression?"
 isCorrectQuestionText = "Are the following equations correct?"
 notationQuestionText = "Which of these is the correct complementary equation for this one?"
 answerQueryText = "Select answer:"
