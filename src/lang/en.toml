@@ -15,6 +15,9 @@ pressToExit = "Press any key to exit..."
 enterToContinue = "Press Enter to continue..."
 enterToExit = "Press Enter to exit..."
 
+success = "Success"
+error = "Error"
+
 [exceptionHandling]
 anErrorOccurredText = "An error occurred while running the program:"
 couldNotLocateText = "Could not locate a necessary module to import."
@@ -49,8 +52,8 @@ Easy
 
 mediumDifficultyDescription = """
 Medium
-- Whole powers involved.
-- Maximum amount of terms: 5.
+- Integer powers involved.
+- Maximum amount of terms: 4.
 - 3 skips allowed.
 - Second order derivatives may appear.
 - 10 questions.
@@ -58,8 +61,8 @@ Medium
 
 hardDifficultyDescription = """
 Hard
-- Whole powers involved.
-- Maximum amount of terms: 6.
+- Integer powers involved.
+- Maximum amount of terms: 5.
 - No skips allowed.
 - Third order derivatives may appear.
 - Notation related questions appear.
@@ -74,8 +77,21 @@ difficultiesQueryChoices = [
     "Cancel"
 ]
 
+[menus.gameLoading]
+selectedDifficultyText = "Selected difficulty: [DIFFICULTY]"
+generatingQuestionsText = "Generating [AMOUNT] questions..."
+generatingQuestionText = "Generating question [N]..."
+generationCompleteText = "Question generation complete."
+
 [menus.game]
-firstOrderDerivativeQuestionText = "What is the derivative of the following function:"
-secondOrderDerivativeQuestionText = "What is the second-order derivative of the following function:"
-thirdOrderDerivativeQuestionText = "What is the third-order derivative of the following function:"
-isCorrectlQuestionText = "Are the following equations correct?"
+questionNumberText = "Question No. [N]"
+firstOrderDerivativeQuestionText = "What is the derivative of the following function?"
+secondOrderDerivativeQuestionText = "What is the second-order derivative of the following function?"
+thirdOrderDerivativeQuestionText = "What is the third-order derivative of the following function?"
+isCorrectQuestionText = "Are the following equations correct?"
+notationQuestionText = "Which of these is the correct complementary equation for this one?"
+answerQueryText = "Select answer:"
+skipChoiceText = "Skip"
+correctAnswerText = "Correct!"
+skippedText = "Question skipped."
+incorrectAnswerText = "Incorrect!"
