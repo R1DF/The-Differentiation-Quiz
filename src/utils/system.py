@@ -18,7 +18,7 @@ def wait(language_pack, to_exit=False):
 
 
 def wait_for_enter(language_pack, to_exit=False):
-    print(language_pack.section_get("multipleUse")["enterToExit" if to_exit else "enterToExit"])
+    print(language_pack.section_get("multipleUse")["enterToExit" if to_exit else "enterToContinue"])
     while True:
         if readchar.readkey() == readchar.key.ENTER:
             break
