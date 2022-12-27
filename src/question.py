@@ -134,15 +134,19 @@ class Question:
                     self.answers[wrong_answer_index + 1].clean_up()
 
             case 2:   # Question type 2: Check if given derivative is correct
+                # Getting symbols
+                function_symbol = chr((random.randint(97, 122)))
+                use_lagrange_notation = random.choice((True, False))
+
                 # Getting answer
                 self.answers = [True, False][::random.choice((1, -1))]  # sneaky way to randomize this list
-                self.involved_question = [self.involved_expression.visualize()]
+                self.involved_question = [function_symbol + " = " + self.involved_expression.visualize()]
                 appearing_expression = self.involved_expression.differentiated()
 
                 if self.answers[1]:  # If the answer IS NOT supposed to be correct
                     # Modifying terms
                     self.apply_modifications(self.get_modifications(2), appearing_expression)
-                self.involved_question.append(appearing_expression.visualize())
+                self.involved_question.append(self.visualize_with_notation(function_symbol, appearing_expression, use_lagrange_notation))
 
             case 3:   # Question type 3: Find correct notation and order of derivative
                 # Getting notation for the question and the derivative
