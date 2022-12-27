@@ -11,6 +11,7 @@ class Question:
         self.minimum_terms_in_question = 2
         self.power_depth = 2  # Power depth: the higher, the more likely there is a power that is higher than normal
         self.answers = []  # First answer is always correct
+        self.involved_order = None  # Only available at type 1 questions
 
     # Modifications functions (Every modification is a list with 4 elements that are all useful in some way)
     def get_random_coefficient(self, allow_negative=False):
@@ -92,10 +93,10 @@ class Question:
         return f"{notation_in_question} = {expression.visualize()}"
 
     # Generates question based on its type
-    def generate(self, minimum_amount_of_terms, allow_negative_powers):
-        used_powers = list(range(0 if not allow_negative_powers else 0 - self.power_depth, minimum_amount_of_terms + self.power_depth))
+    def generate(self, maximum_amount_of_terms, allow_negative_powers, order_limit=1):
+        used_powers = list(range(0 if not allow_negative_powers else 0 - self.power_depth, maximum_amount_of_terms + self.power_depth))
         # Building the expression
-        for term in range(random.randint(self.minimum_terms_in_question, minimum_amount_of_terms)):
+        for term in range(random.randint(self.minimum_terms_in_question, maximum_amount_of_terms)):
             power = random.choice(used_powers)
             self.involved_expression.add_term(
                 coefficient=self.get_random_coefficient(allow_negative_powers),
@@ -107,8 +108,19 @@ class Question:
 
         match self.question_type:
             case 1:  # Question type 1: Find derivative of expression
-                # Getting answer
-                self.answers.append(self.involved_expression.differentiated())
+                # Generating answer based on kind of order
+                self.involved_order = random.randint(1, order_limit)
+                match self.involved_order:
+                    case 1:
+                        self.answers.append(self.involved_expression.differentiated())
+                    case 2 | 3:
+                        if len(self.involved_expression.terms) > self.involved_order - 1:
+                            self.answers.append(self.involved_expression.differentiated().differentiated())
+                            if self.involved_order == 3:
+                                self.answers[0] = self.answers[0].differentiated()
+                        else:
+                            self.involved_order = 1
+                            self.answers.append(self.involved_expression.differentiated())
 
                 # Adding wrong answers as mere copies
                 for wrong_answer in range(3):
