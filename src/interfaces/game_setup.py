@@ -1,11 +1,10 @@
 # Imports
 import questionary
-import sys
 from .base import InterfaceCL
-from utils.text import get_language_entry, combine_language_entries, get_language_confirmation, break_line
+from utils.text import get_language_entry, combine_language_entries, break_line
 from utils.system import clear
 
-# Main menu
+# Game setup interface
 class GameSetupInterfaceCL(InterfaceCL):
     def __init__(self, master, language_section_name):
         super().__init__(master, language_section_name)
@@ -29,6 +28,8 @@ class GameSetupInterfaceCL(InterfaceCL):
             case 3:
                 self.master.make_main_menu()
                 return
+            case _:
+                self.master.make_game_loading_menu(selected_option + 1)
+                return
 
-        self.load_interface()
 
