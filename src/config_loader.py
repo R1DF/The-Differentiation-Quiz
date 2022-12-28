@@ -11,5 +11,4 @@ class Configurations:
         # Getting inner values for ease
         self.program_data = self.data["program"]
         self.defaults = self.data["defaults"]
-        self.game_data = self.data["game"]
 
