@@ -1,7 +1,7 @@
 # Imports
 import questionary
 from .base import InterfaceCL
-from utils.text import get_language_entry, get_utility_entry, break_line
+from utils.text import get_language_entry, get_utility_entry, break_line, success, warn, alarm
 from utils.system import clear, wait_for_enter
 from game import Game
 from random import shuffle
@@ -12,6 +12,9 @@ from specific_exception import GameException
 class GameInterfaceCL(InterfaceCL):
     def __init__(self, master, language_section_name, game: Game):
         self.game = game
+        self.correct_questions = []
+        self.incorrect_questions = []
+        self.skipped_questions = []
         super().__init__(master, language_section_name)
 
     def scramble_answers(self, answers):
@@ -31,7 +34,8 @@ class GameInterfaceCL(InterfaceCL):
             involved_question = question.involved_question
             match question.question_type:
                 case 1:
-                    header = get_language_entry(self, f"{['first', 'second', 'third'][question.involved_order - 1]}OrderDerivativeQuestionText")
+                    header = get_language_entry(self,
+                                                f"{['first', 'second', 'third'][question.involved_order - 1]}OrderDerivativeQuestionText")
                     answers, correct_answer_index = self.scramble_answers([x.visualize() for x in question.answers])
                 case 2:
                     header = get_language_entry(self, "isCorrectQuestionText")
@@ -62,10 +66,51 @@ class GameInterfaceCL(InterfaceCL):
             ).unsafe_ask())
 
             if user_answer == len(answers):  # If skipped
-                print("skip")
+                self.game.questions_skipped += 1
+                self.game.skips_left -= 1
+                self.skipped_questions.append(question_index + 1)
+                print(get_language_entry(self, "skippedText"))
             elif user_answer == correct_answer_index:  # If correctly answered
-                print("correct")
+                self.game.correctly_answered += 1
+                self.correct_questions.append(question_index + 1)
+                print(get_language_entry(self, "correctAnswerText"))
             else:  # If question answered wrongly
-                print("idiot")
+                self.incorrect_questions.append(question_index + 1)
+                self.game.incorrectly_answered += 1
+                print(get_language_entry(self, "incorrectAnswerText"))
 
             wait_for_enter(self.master.language_pack)
+            clear()
+        self.give_results()
+
+    def give_results(self):
+        amount_of_questions = len(self.game.questions)
+        correct_questions_amount = len(self.correct_questions)
+        print(get_language_entry(self, "resultsText"))
+        break_line()
+
+        for question_index in range(amount_of_questions):
+            print(get_language_entry(self, "questionResultText").replace("[N]", str(question_index + 1)), end=" ")
+            if question_index + 1 in self.correct_questions:
+                success(get_language_entry(self, "resultTextEntries")[0])
+            elif question_index + 1 in self.incorrect_questions:
+                alarm(get_language_entry(self, "resultTextEntries")[1])
+            else:
+                warn(get_language_entry(self, "resultTextEntries")[2])
+        break_line()
+
+        try:
+            percentage = correct_questions_amount / (amount_of_questions - len(self.skipped_questions))
+        except ZeroDivisionError:  # If all questions were skipped
+            percentage = 0
+
+        print(get_language_entry(self, "resultFractionText").replace(
+            "[CORRECT]", str(correct_questions_amount)).replace(
+                "[AMOUNT]", str(amount_of_questions))
+        )
+        print(get_language_entry(self, "resultPercentageText").replace("[N]", str(round(percentage, 2) * 100)))
+        break_line()
+
+        wait_for_enter(self.master.language_pack, True)
+        self.master.make_main_menu()
+
