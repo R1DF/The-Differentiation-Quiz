@@ -8,7 +8,7 @@ from random import shuffle
 from specific_exception import GameException
 
 
-# Game loader interface
+# Game interface
 class GameInterfaceCL(InterfaceCL):
     def __init__(self, master, language_section_name, game: Game):
         self.game = game
