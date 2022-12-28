@@ -153,16 +153,21 @@ class Question:
                 use_lagrange_notation = random.choice((True, False))
                 function_symbol = chr(random.choice((random.randint(97, 122), random.randint(65, 90))))
                 appearing_expression = self.involved_expression.copy()
-                for i in range(order := random.randint(self.involved_expression.lowest_power(), self.involved_expression.degree())):
+                for i in range(order := random.randint(1, self.involved_expression.degree())):
                     appearing_expression = appearing_expression.differentiated()
                 self.involved_question = f"{function_symbol}{'(x)' if use_lagrange_notation else ''} = {self.involved_expression.visualize()}"
 
                 # Making correct answer
-                orders_available = {str(order): [] for order in list(range(self.involved_expression.lowest_power(), self.involved_expression.degree() + 1))}
+                orders_available = {str(order): [] for order in list(range(1, self.involved_expression.degree() + 1))}
                 # orders_available = list(range(1, self.involved_expression.degree() + 1))
                 self.answers = [self.visualize_with_notation(function_symbol, appearing_expression, use_lagrange_notation, order)]
                 orders_available[str(order)].append("lagrange" if use_lagrange_notation else "leibniz")  # Lagrange: f'(x), Leibniz: dy/dx
                 # Orders are stored in a dict with a value of 2 lists for every order (to track if 1 notation or 2 have been used)
+
+                # Checking which level polynomial the question is to add any extra orders needed
+                if len(self.involved_expression.terms) > len(orders_available):
+                    for extra_order in range(self.involved_expression.degree() + 1, self.involved_expression.degree() + len(self.involved_expression.terms) - len(orders_available) + 1):
+                        orders_available[str(self.involved_expression.degree() + extra_order + 1)] = []
 
                 # Creation of wrong notations
                 for wrong_answer_number in range(3):
