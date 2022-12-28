@@ -27,6 +27,10 @@ class MainMenuInterfaceCL(InterfaceCL):
                 self.master.make_game_setup_menu()
                 return
 
+            case 1:
+                self.master.make_settings_interface()
+                return
+
             case 2:
                 self.master.make_updates_check_interface()
                 return
