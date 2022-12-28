@@ -95,3 +95,25 @@ skipChoiceText = "Skip"
 correctAnswerText = "Correct!"
 skippedText = "Question skipped."
 incorrectAnswerText = "Incorrect!"
+resultsText = "Your game results:"
+questionResultText = "Question No. [N]:"
+resultTextEntries = [
+    "Correct",
+    "Incorrect",
+    "Skipped"
+]
+resultFractionText = "Correct answers: [CORRECT] out of [AMOUNT]."
+resultPercentageText = "Percentage score: [N]%"
+
+
+[menus.checkingUpdates]
+testingSampleRequestText = "Sending sample request..."
+requestPassedText = "Sample request passed."
+noInternetErrorText = "Error: Please check your internet connection."
+invalidStatusCodeText = "Error: Received invalid status code. [[CODE]]"
+checkingForUpdatesText = "Checking for updates..."
+latestVersionText = "You're on the latest version!\nNo upgrades needed."
+upgradeNeededText = "An upgrade is available: [v.[OLD] --> v.[NEW]]"
+versionNotesIntroducerText = "Version notes:"
+getUpdatesLinkText = "Link to download updates:"
+linkToCheckText = "You can manually check for updates with the following link:"
