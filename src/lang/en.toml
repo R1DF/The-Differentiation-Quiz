@@ -1,6 +1,7 @@
 [meta]
+name = "English (preinstalled)"
 author = "R1DF"
-dateCreated = [18, 12, 2022]
+dateCreated = "18.12.22"
 description = "The official, preinstalled language pack for The Differentiation Quiz."
 forVersion = "1.0.0"
 
@@ -105,6 +106,36 @@ resultTextEntries = [
 resultFractionText = "Correct answers: [CORRECT] out of [AMOUNT]."
 resultPercentageText = "Percentage score: [N]%"
 
+[menus.settings]
+settingsIntroductionText = "Settings"
+verifyFilePresenceText = "Verify file presence:"
+safeStartText = "Safe start:"
+languageText = "Language:"
+selectOptionQueryText = "Select:"
+dontVerifyFilePresenceChoiceText = "Don't verify file presence"
+verifyFilePresenceChoiceText = "Verify flie presence on start"
+startSafelyChoiceText = "Start with safe exception handling"
+dontStartSafelyChoiceText = "Start without exception handling"
+settingsOptionEntries = [
+    "Change language",
+    "View credits",
+    "Save changes",
+    "Cancel"
+]
+unsavedChangesText = "Your changes aren't saved."
+creditsText = "The Differentiation Quiz (since December 2022)\nWritten by R1DF.\nMade with math (and love) in Python and Pycharm.\n\nSpecial thanks to Aru for whom the game was meant as a joke for."
+restartNeededText = "Your settings have been saved.\nFor them to go in effect, though, you must close the game and restart it."
+sameSettingsText = "No changes detected. Configurations file left ummodified. "
+
+[menus.language]
+languagesText = "Languages"
+languagesInstalledText = "Languages detected: [N]"
+changeLanguageQueryText = "Select language:"
+cancelChoiceText = "Cancel"
+onlyOneLanguageText = "You have only one language installed.\nPlease download more and move them to the \"lang\" folder inside the game folder."
+noLanguagesText = """No language detected.
+This game will not work correctly the next time you will open it.
+Please open the game's repository link to download and install a language."""
 
 [menus.checkingUpdates]
 testingSampleRequestText = "Sending sample request..."
