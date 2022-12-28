@@ -4,5 +4,3 @@ safe_start = true
 
 [defaults]
 language = "en.toml"
-
-[game]
