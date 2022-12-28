@@ -5,6 +5,7 @@ import toml
 class LanguagePack:
     def __init__(self, path):
         self.data = toml.load(path)
+        self.name = self.data["meta"]["name"]
 
     def section_get(self, section):
         return self.data[section]
