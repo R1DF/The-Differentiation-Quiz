@@ -9,10 +9,11 @@ from utils.system import clear, wait_for_enter
 TEST_URL = "http://httpstat.us/200"
 VERSION_CHECK_URL = "https://r1df.github.io/version_check.json"
 UPDATES_LINK = "https://github.com/R1DF/The-Differentiation-Quiz/releases"
+REPOSITORY_LINK = "https://github.com/R1DF/The-Differentiation-Quiz/"
 
 
 # Updates check interface
-class UpdatesCheckInterface(InterfaceCL):
+class UpdatesCheckInterfaceCL(InterfaceCL):
     def __init__(self, master, language_section_name, version):
         self.version = version
         super().__init__(master, language_section_name)
