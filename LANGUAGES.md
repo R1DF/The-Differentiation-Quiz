@@ -19,6 +19,6 @@ It will be detected, **but** it lacks the mandatory metadata then it will not be
 
 ## Preinstalled languages list
 | Language | File | Link (for download) |
-| ---------------------- |
+| -------- | ---- | ------------------- |
 | English | `en.toml` | [link](https://raw.githubusercontent.com/R1DF/The-Differentiation-Quiz/master/src/lang/en.toml) |
 | Russian | `ru.toml` | [link](https://raw.githubusercontent.com/R1DF/The-Differentiation-Quiz/master/src/lang/ru.toml) |
