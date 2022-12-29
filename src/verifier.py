@@ -8,30 +8,44 @@ import os
 
 # Constants
 PATHS = (
-    "config",
     ("config", "conf.toml"),
-    "interfaces",
+    ("interfaces", "__init__.py"),
+    ("interfaces", "base.py"),
+    ("interfaces", "game_interface.py"),
+    ("interfaces", "game_loader.py"),
+    ("interfaces", "game_setup.py"),
+    ("interfaces", "language_interface.py"),
+    ("interfaces", "main_menu.py"),
+    ("interfaces", "settings_interface.py"),
+    ("interfaces", "updates_check_interface.py"),
     "lang",
+    ("utils", "__init__.py"),
+    ("utils", "system.py"),
+    ("utils", "text.py"),
     "config_loader.py",
     "expression.py",
+    "game.py",
     "lang_loader.py",
     "main.py",
+    "question.py",
+    "specific_exception.py",
     "start.py",
-    "term.py",
-    "verifier.py",
-    "utils",
-    ("utils", "__init__.py"),
-    ("utils", "text.py")
+    "term.py"
 )
+
 
 # Verifier
 class Verifier:
     @staticmethod
     def verify():
         for path_element in PATHS:
-            if not os.path.exists(os.path.join(*path_element if type(path_element) is list else path_element)):
-                return False
-        return True
+            checked_path = os.path.join(*path_element) if type(path_element) is tuple else path_element
+            print(checked_path, end=": ")
+            if not os.path.exists(checked_path):
+                print("ERR")
+                return False, checked_path
+            print("OK")
+        return True, None
 
 
 # Function
