@@ -3,6 +3,7 @@ import random
 from question import Question
 from utils.text import success
 
+
 # Game class
 class Game:
     def __init__(
@@ -21,7 +22,7 @@ class Game:
         self.incorrectly_answered = 0
         self.skips_left = allowed_skips
 
-    def generate(self, maximum_amount_of_terms, track_generation=False, question_number_text=None, success_text = ""):
+    def generate(self, maximum_amount_of_terms, track_generation=False, question_number_text=None, success_text=""):
         question_types = {
             "2": random.randint(1, 4) if 2 in self.allowed_question_types else 0,
             "3": random.randint(1, 4) if 3 in self.allowed_question_types else 0

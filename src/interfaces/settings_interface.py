@@ -7,6 +7,7 @@ from .base import InterfaceCL
 from utils.text import get_language_entry, get_utility_entry, warn, break_line
 from utils.system import clear, wait_for_enter
 
+
 # Settings interface
 class SettingsInterfaceCL(InterfaceCL):
     def __init__(self, master, language_section_name):
@@ -18,7 +19,8 @@ class SettingsInterfaceCL(InterfaceCL):
         # Introduction
         clear()
         print(get_language_entry(self, "settingsIntroductionText"))
-        current_language = toml.load(os.path.join("lang", self.current_settings["defaults"]["language"]))["meta"]["name"]
+        current_language = toml.load(os.path.join("lang", self.current_settings["defaults"]["language"]))["meta"][
+            "name"]
         break_line()
 
         # Printing out the current settings
@@ -36,10 +38,11 @@ class SettingsInterfaceCL(InterfaceCL):
 
         # Getting choices
         choices = [
-                get_language_entry(self, f"{'dontV' if self.current_settings['program']['verify_file_presence'] else 'v'}erifyFilePresenceChoiceText"),
+                      get_language_entry(self,
+                                         f"{'dontV' if self.current_settings['program']['verify_file_presence'] else 'v'}erifyFilePresenceChoiceText"),
                       get_language_entry(self,
                                          f"{'dontS' if self.current_settings['program']['safe_start'] else 's'}tartSafelyChoiceText"),
-        ] + get_language_entry(self, "settingsOptionEntries")
+                  ] + get_language_entry(self, "settingsOptionEntries")
         choice = choices.index(questionary.select(
             get_language_entry(self, "selectOptionQueryText"),
             choices=choices
@@ -49,7 +52,8 @@ class SettingsInterfaceCL(InterfaceCL):
         # Acting on choices
         match choice:
             case 0:
-                self.current_settings["program"]["verify_file_presence"] = not self.current_settings["program"]["verify_file_presence"]
+                self.current_settings["program"]["verify_file_presence"] = not self.current_settings["program"][
+                    "verify_file_presence"]
 
             case 1:
                 self.current_settings["program"]["safe_start"] = not self.current_settings["program"]["safe_start"]
@@ -75,5 +79,6 @@ class SettingsInterfaceCL(InterfaceCL):
             case 5:
                 self.master.make_main_menu()
                 return
+
         self.load_interface()
 

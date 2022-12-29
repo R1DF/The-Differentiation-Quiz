@@ -1,6 +1,7 @@
 # Imports
 import toml
 
+
 # Language Pack class
 class LanguagePack:
     def __init__(self, path):

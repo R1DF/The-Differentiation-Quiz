@@ -2,6 +2,7 @@
 import random
 from expression import Expression
 
+
 # Question base
 class Question:
     def __init__(self, question_type):
@@ -23,13 +24,15 @@ class Question:
         modifications = []
         if self.question_type == 2:
             differentiated_expression = self.involved_expression.differentiated()  # If the list of answers has bools then a new differentiated form must be made
-        burner_expression = self.answers[0].pseudocopy() if self.question_type == 1 else differentiated_expression.pseudocopy()
+        burner_expression = self.answers[
+            0].pseudocopy() if self.question_type == 1 else differentiated_expression.pseudocopy()
         for modification in range(maximum_modifications_amount):
             if not len(burner_expression.terms):
                 break
             term = random.choice(burner_expression.terms)
             modifications.append([
-                self.answers[0].terms.index(term) if self.question_type == 1 else differentiated_expression.terms.index(term),  # Index of the term, using the correct answer as the burner is modified every rotation
+                self.answers[0].terms.index(term) if self.question_type == 1 else differentiated_expression.terms.index(
+                    term),  # Index of the term, using the correct answer as the burner is modified every rotation
                 random.randint(1, 2),  # 1 - Coefficient, 2 - Power
                 random.choice([(random.randint(-3, -1)), random.randint(1, 3)]),  # Modifier,
                 term.power
@@ -37,7 +40,7 @@ class Question:
             burner_expression.terms.remove(term)
         return sorted(modifications, key=lambda x: x[0])
 
-    def apply_modifications(self, modifications, expression):   # Applies modifications to expression
+    def apply_modifications(self, modifications, expression):  # Applies modifications to expression
         for modifier_value_1, modifier_value_2, modifier_value_3, residue in modifications:
             """
             The values of a modification are ambiguous and that is why the names of the values in the for loop are so vague.
@@ -94,7 +97,8 @@ class Question:
 
     # Generates question based on its type
     def generate(self, maximum_amount_of_terms, allow_negative_powers, order_limit=1):
-        used_powers = list(range(0 if not allow_negative_powers else 0 - self.power_depth, maximum_amount_of_terms + self.power_depth))
+        used_powers = list(
+            range(0 if not allow_negative_powers else 0 - self.power_depth, maximum_amount_of_terms + self.power_depth))
         # Building the expression
         for term in range(random.randint(self.minimum_terms_in_question, maximum_amount_of_terms)):
             power = random.choice(used_powers)
@@ -133,7 +137,7 @@ class Question:
                     modifications.append(self.alter_modifications(modifications[-1], modifications))
                     self.answers[wrong_answer_index + 1].clean_up()
 
-            case 2:   # Question type 2: Check if given derivative is correct
+            case 2:  # Question type 2: Check if given derivative is correct
                 # Getting symbols
                 function_symbol = chr((random.randint(97, 122)))
                 use_lagrange_notation = random.choice((True, False))
@@ -146,9 +150,10 @@ class Question:
                 if self.answers[1]:  # If the answer IS NOT supposed to be correct
                     # Modifying terms
                     self.apply_modifications(self.get_modifications(2), appearing_expression)
-                self.involved_question.append(self.visualize_with_notation(function_symbol, appearing_expression, use_lagrange_notation))
+                self.involved_question.append(
+                    self.visualize_with_notation(function_symbol, appearing_expression, use_lagrange_notation))
 
-            case 3:   # Question type 3: Find correct notation and order of derivative
+            case 3:  # Question type 3: Find correct notation and order of derivative
                 # Getting notation for the question and the derivative
                 use_lagrange_notation = random.choice((True, False))
                 function_symbol = chr(random.choice((random.randint(97, 122), random.randint(65, 90))))
@@ -160,21 +165,28 @@ class Question:
                 # Making correct answer
                 orders_available = {str(order): [] for order in list(range(1, self.involved_expression.degree() + 1))}
                 # orders_available = list(range(1, self.involved_expression.degree() + 1))
-                self.answers = [self.visualize_with_notation(function_symbol, appearing_expression, use_lagrange_notation, order)]
-                orders_available[str(order)].append("lagrange" if use_lagrange_notation else "leibniz")  # Lagrange: f'(x), Leibniz: dy/dx
+                self.answers = [
+                    self.visualize_with_notation(function_symbol, appearing_expression, use_lagrange_notation, order)]
+                orders_available[str(order)].append(
+                    "lagrange" if use_lagrange_notation else "leibniz")  # Lagrange: f'(x), Leibniz: dy/dx
                 # Orders are stored in a dict with a value of 2 lists for every order (to track if 1 notation or 2 have been used)
 
                 # Checking which level polynomial the question is to add any extra orders needed
                 if len(self.involved_expression.terms) > len(orders_available):
-                    for extra_order in range(self.involved_expression.degree() + 1, self.involved_expression.degree() + len(self.involved_expression.terms) - len(orders_available) + 1):
+                    for extra_order in range(self.involved_expression.degree() + 1,
+                                             self.involved_expression.degree() + len(
+                                                     self.involved_expression.terms) - len(orders_available) + 1):
                         orders_available[str(self.involved_expression.degree() + extra_order + 1)] = []
 
                 # Creation of wrong notations
                 for wrong_answer_number in range(3):
-                    random_order = random.choice(list({str(key): value for key, value in orders_available.items() if len(value) != 2}.keys()))
-                    use_lagrange_notation_in_wrong_answer = random.choice((True, False)) if not orders_available[random_order] else orders_available[random_order][0] == "leibniz"
+                    random_order = random.choice(
+                        list({str(key): value for key, value in orders_available.items() if len(value) != 2}.keys()))
+                    use_lagrange_notation_in_wrong_answer = random.choice((True, False)) if not orders_available[
+                        random_order] else orders_available[random_order][0] == "leibniz"
                     self.answers.append(
-                        self.visualize_with_notation(function_symbol, appearing_expression, use_lagrange_notation_in_wrong_answer, int(random_order))
+                        self.visualize_with_notation(function_symbol, appearing_expression,
+                                                     use_lagrange_notation_in_wrong_answer, int(random_order))
                     )
-                    orders_available[random_order].append("lagrange" if use_lagrange_notation_in_wrong_answer else "leibniz")
-
+                    orders_available[random_order].append(
+                        "lagrange" if use_lagrange_notation_in_wrong_answer else "leibniz")

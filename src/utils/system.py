@@ -3,8 +3,10 @@ import os
 import platform
 import readchar
 
+
 # Platform
 PLATFORM = platform.system()
+
 
 # System functions
 def title(terminal_title=""):

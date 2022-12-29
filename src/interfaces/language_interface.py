@@ -7,9 +7,10 @@ from .updates_check_interface import REPOSITORY_LINK
 from utils.text import get_language_entry, break_line
 from utils.system import clear, wait_for_enter
 
+
 # Language interface
 class LanguageInterfaceCL(InterfaceCL):
-    def __init__(self, master, language_section_name, dictionary_to_modify, version, current_language_name):
+    def __init__(self, master, language_section_name, dictionary_to_modify, version):
         self.dictionary_to_modify = dictionary_to_modify
         self.version = version
         self.languages_files = [x for x in os.listdir(os.path.join(os.getcwd(), "lang")) if x.endswith(".toml")]
@@ -32,7 +33,6 @@ class LanguageInterfaceCL(InterfaceCL):
                     continue
             returned.append(dictionary["meta"])
         return returned
-
 
     def load_interface(self):
         # Introduction
@@ -77,3 +77,4 @@ class LanguageInterfaceCL(InterfaceCL):
 
         except ValueError:  # If the option was cancelled
             pass
+

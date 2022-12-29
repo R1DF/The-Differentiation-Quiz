@@ -18,9 +18,11 @@ from utils.system import title
 from config_loader import Configurations
 from lang_loader import LanguagePack
 
+
 # App
 class TheDifferentiationQuiz:
     VERSION = "1.0.0"
+
     def __init__(self, configurations: Configurations, language_pack: LanguagePack):
         self.configurations = configurations
         self.language_pack = language_pack
@@ -30,7 +32,7 @@ class TheDifferentiationQuiz:
 
     def make_main_menu(self):
         self.current_menu = MainMenuInterfaceCL(self, "mainMenu")
-        del self.current_menu  # I'm unsure if using "del" kills the class object so they aren't being redefined yet saved but whatever
+        del self.current_menu  # I'm unsure if using "del" kills the class object, so they aren't being redefined yet saved but whatever
 
     def make_game_setup_menu(self):
         self.current_menu = GameSetupInterfaceCL(self, "gameSetup")
@@ -53,6 +55,6 @@ class TheDifferentiationQuiz:
         del self.current_menu
 
     def make_language_interface(self, dictionary_to_modify):
-        self.current_menu = LanguageInterfaceCL(self, "language", dictionary_to_modify, TheDifferentiationQuiz.VERSION, self.language_pack.name)
-        #del self.current_menu
+        self.current_menu = LanguageInterfaceCL(self, "language", dictionary_to_modify, TheDifferentiationQuiz.VERSION)
+        # del self.current_menu  # Unneeded
 

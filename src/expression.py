@@ -8,7 +8,7 @@ class Expression:
         self.terms = terms if terms is not None else []  # Using mutable default arguments is a blunder
 
     def degree(self):
-        """Returns the power of x of the term with the highest (absolute) value for x (when exponentiated)."""
+        """Returns the power of x of the term with the highest (absolute) value for x (when raised to power)."""
         return max(self.terms, key=lambda term: term.power).power   # Returns the degree of the polynomial (e.g. x^2 is highest power -> 2)
 
     def lowest_power(self):
@@ -62,5 +62,5 @@ class Expression:
 
     def pseudocopy(self):
         """copy() but the Terms inside are the same as the original term. Do not use unless you know what you're doing."""
-        return Expression([x for x in self.terms])
+        return Expression(self.terms)
 

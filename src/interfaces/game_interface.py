@@ -15,6 +15,7 @@ class GameInterfaceCL(InterfaceCL):
         self.correct_questions = []
         self.incorrect_questions = []
         self.skipped_questions = []
+        self.yes_text, self.no_text = None, None
         super().__init__(master, language_section_name)
 
     def scramble_answers(self, answers):
@@ -106,11 +107,10 @@ class GameInterfaceCL(InterfaceCL):
 
         print(get_language_entry(self, "resultFractionText").replace(
             "[CORRECT]", str(correct_questions_amount)).replace(
-                "[AMOUNT]", str(amount_of_questions))
+            "[AMOUNT]", str(amount_of_questions))
         )
         print(get_language_entry(self, "resultPercentageText").replace("[N]", str(round(percentage, 2) * 100)))
         break_line()
 
         wait_for_enter(self.master.language_pack, True)
         self.master.make_main_menu()
-

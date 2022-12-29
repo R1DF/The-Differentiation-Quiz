@@ -1,6 +1,7 @@
 # Imports
 import toml
 
+
 # Configurations class
 class Configurations:
     def __init__(self, path):

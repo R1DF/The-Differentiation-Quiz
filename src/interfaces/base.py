@@ -2,8 +2,6 @@
 Interfaces (in this context) are meant to work as CLI "menu" screens.
 """
 
-# Imports
-from utils.system import clear
 
 # Base
 class InterfaceCL:
@@ -18,3 +16,4 @@ class InterfaceCL:
 
     def load_interface(self):
         pass  # Overridden
+

@@ -2,8 +2,9 @@
 import questionary
 import sys
 from .base import InterfaceCL
-from utils.text import get_language_entry, combine_language_entries, get_language_confirmation, break_line
+from utils.text import get_language_entry, get_language_confirmation, break_line
 from utils.system import clear
+
 
 # Main menu
 class MainMenuInterfaceCL(InterfaceCL):

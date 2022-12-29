@@ -1,6 +1,8 @@
 """
 Term objects have a coefficient and power value attached to themselves.
 """
+
+
 class Term:
     def __init__(self, coefficient=1.0, power=1.0):
         self.coefficient = coefficient
