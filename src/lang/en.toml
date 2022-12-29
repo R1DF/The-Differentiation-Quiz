@@ -116,8 +116,8 @@ verifyFilePresenceText = "Verify file presence:"
 safeStartText = "Safe start:"
 languageText = "Language:"
 selectOptionQueryText = "Select:"
-dontVerifyFilePresenceChoiceText = "Don't verify file presence"
 verifyFilePresenceChoiceText = "Verify flie presence on start"
+dontVerifyFilePresenceChoiceText = "Don't verify file presence"
 startSafelyChoiceText = "Start with safe exception handling"
 dontStartSafelyChoiceText = "Start without exception handling"
 settingsOptionEntries = [
@@ -127,9 +127,9 @@ settingsOptionEntries = [
     "Cancel"
 ]
 unsavedChangesText = "Your changes aren't saved."
-creditsText = "The Differentiation Quiz (since December 2022)\nWritten by R1DF.\nMade with math (and love) in Python and Pycharm.\n\nSpecial thanks to Aru for whom the game was meant as a joke for."
+creditsText = "The Differentiation Quiz (since December 2022)\nWritten by R1DF.\nMade with math (and love) in Python and Pycharm."
 restartNeededText = "Your settings have been saved.\nFor them to go in effect, though, you must close the game and restart it."
-sameSettingsText = "No changes detected. Configurations file left ummodified. "
+sameSettingsText = "No changes detected. Configurations file left ummodified."
 
 [menus.language]
 languagesText = "Languages"
