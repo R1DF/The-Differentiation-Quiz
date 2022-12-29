@@ -5,6 +5,12 @@ dateCreated = "18.12.22"
 description = "The official, preinstalled language pack for The Differentiation Quiz."
 forVersion = "1.0.0"
 
+[fileVerification]
+verifyingFilesText = "Verifying file presence..."
+filesVerifiedText = "All files and folders present."
+fileMissingText = "Error: A file or folder is missing."
+errorDescriptionText = "Missing file/folder \"[FILE]\".\nPlease reinstall the game."
+
 [multipleUse]
 closedQuestionAnswers = [
     "Yes",
@@ -20,13 +26,11 @@ success = "Success"
 error = "Error"
 
 [exceptionHandling]
-anErrorOccurredText = "An error occurred while running the program:"
-couldNotLocateText = "Could not locate a necessary module to import."
-couldNotImportText = "Could not import a class or a function from a module."
-exceptionMessageFilledText = "Exception message: [EXCEPTION]"
-ModuleNotFoundErrorText = "[ModuleNotFoundError]"
-ImportErrorText = "[ImportError]"
+errorHappenedText = "An unprecedented error happened while running the program."
+exceptionMessageText = "Exception message: [MSG] [[EXCEPTION]]"
+locationText = "Traceback to file [FILE], line No. [LINE]"
 pleaseReinstallText = "Please reinstall the game."
+pressEnterText = "Press Enter to exit the program."
 
 [menus]
 [menus.mainMenu]
