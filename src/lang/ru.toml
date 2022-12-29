@@ -1,0 +1,154 @@
+[meta]
+name = "Русский"
+author = "R1DF"
+dateCreated = "18.12.22"
+description = "Официальный русский перевод игры The Differentiation Quiz."
+forVersion = "1.0.0"
+
+[fileVerification]
+verifyingFilesText = "Проверка файлов..."
+filesVerifiedText = "Все использованные файлы найдены."
+fileMissingText = "Ошибка: Файл или папка не найдена."
+errorDescriptionText = "Нет файла/папки \"[FILE]\".\nПожалуйста переустановите игру."
+
+[multipleUse]
+closedQuestionAnswers = [
+    "Да",
+    "Нет"
+]
+
+pressToContinue = "Нажмите любую клавишу чтобы продолжить..."
+pressToExit = "Нажмите любую клавишу чтобы выйти..."
+enterToContinue = "Нажмите Enter чтобы продолжить..."
+enterToExit = "Нажмите Enter чтобы выйти..."
+
+success = "Успех"
+error = "Ошибка"
+
+[exceptionHandling]
+errorHappenedText = "Произошла неожиданная ошибка в программе."
+exceptionMessageText = "Сообщение ошибки: [MSG] [[EXCEPTION]]"
+locationText = "Файл [FILE], линия [LINE]"
+pleaseReinstallText = "Пожалуйтся переустановите игру."
+pressEnterText = "Нажмите Enter чтобы выйти."
+
+[menus]
+[menus.mainMenu]
+welcomeText = "Добро пожаловать в The Differentiation Quiz."
+runningVersionText = "Версия v[VERSION]."
+doWhatQueryText = "Выберите действие:"
+doWhatQueryChoices = [
+    "Играть",
+    "Настройки",
+    "Проверить обновления",
+    "Выйти"
+]
+confirmQuitQuery = "Вы точно хотите выйти?"
+
+[menus.gameSetup]
+difficultiesText = "Пожалуйста проверьте сложности и выберите один из них."
+easyDifficultyDescription = """
+Лёгкая
+- Степени используют толькоо натуральные числа (ноль включён).
+- Макс. количество членов: 3.
+- Вопросы можно пропускать (не считаются правильно отвечены).
+- 7 вопросов.
+"""
+
+mediumDifficultyDescription = """
+Нормальная
+- Степени используют целые числа.
+- Макс. количество членов: 4.
+- 3 пропусков вопроса разрешено.
+- Вопросы могут спрашивать о производных второго порядка.
+- 10 вопросов.
+"""
+
+hardDifficultyDescription = """
+Тяжёлая
+- Степени используют целые числа.
+- Макс. количество членов: 5.
+- Вопросы нельзя пропустить.
+- Вопросы про нотацию появляются.
+- Вопросы могут спрашивать о производных второго и/или третьего порядка.
+- 13 вопросов.
+"""
+
+difficultiesQueryText = "Выберите сложность:"
+difficultiesQueryChoices = [
+    "Лёгкая",
+    "Нормальная",
+    "Тяжёлая",
+    "Назад"
+]
+
+[menus.gameLoading]
+selectedDifficultyText = "Выберена сложность: [DIFFICULTY]"
+generatingQuestionsText = "Генерируются [AMOUNT] вопросов..."
+generatingQuestionText = "Генерируются вопрос [N]..."
+generationCompleteText = "Генерация вопросов закончена."
+
+[menus.game]
+questionNumberText = "Вопрос [N]"
+firstOrderDerivativeQuestionText = "Какая производная следующего выражения?"
+secondOrderDerivativeQuestionText = "Какая производная второго порядка следующего выражения?"
+thirdOrderDerivativeQuestionText = "Какая производная третьего порядка следующего выражения?"
+isCorrectQuestionText = "Являются ли данные уравнения правильными?"
+notationQuestionText = "Какое уравнение является правильным для данного уравнения?"
+answerQueryText = "Ваш ответ:"
+skipChoiceText = "Пропустить"
+correctAnswerText = "Правильно!"
+skippedText = "Вопрос пропущен."
+incorrectAnswerText = "Неправильно!"
+resultsText = "Ваши результаты:"
+questionResultText = "Вопрос [N]:"
+resultTextEntries = [
+    "Правильно",
+    "Неправильно",
+    "Пропущено"
+]
+resultFractionText = "Правильные ответы: [CORRECT] из [AMOUNT]."
+resultPercentageText = "Процент: [N]%"
+
+[menus.settings]
+settingsIntroductionText = "Настройки"
+verifyFilePresenceText = "Пропускать наличие файлов:"
+safeStartText = "Безопасный запуск:"
+languageText = "Язык:"
+selectOptionQueryText = "Ваш выбер:"
+verifyFilePresenceChoiceText = "Проверять наличие файлов"
+dontVerifyFilePresenceChoiceText = "Не проверять наличие файлов"
+startSafelyChoiceText = "Запускать безопасно"
+dontStartSafelyChoiceText = "Не запускать безопасно"
+settingsOptionEntries = [
+    "Сменить язык",
+    "Информация об игре",
+    "Сохранить изменения",
+    "Отмена"
+]
+unsavedChangesText = "Ваши изменения не сохранены."
+creditsText = "The Differentiation Quiz (с Декабря 2022)\nНаписано R1DF.\nСделано с математикой (и любовью) на Python и Pycharm."
+restartNeededText = "Изменения сохранены.\nПожалуйста перезапустите игру чтобы они были использованы."
+sameSettingsText = "Изменений не было обнаружено. Файл настроек отсался как есть."
+
+[menus.language]
+languagesText = "Языки"
+languagesInstalledText = "Языков обнаружено: [N]"
+changeLanguageQueryText = "Выберить язык:"
+cancelChoiceText = "Отмена"
+onlyOneLanguageText = "У вас только один язык.\nПожалуйста загрузите больше и поместите их в папку \"lang\"."
+noLanguagesText = """Языков не было обнаружена.
+Программа не сработает следующий раз.
+Пожалуйста открыте ссылку игры чтоьбы переустановить."""
+
+[menus.checkingUpdates]
+testingSampleRequestText = "Отправляется тест запрос..."
+requestPassedText = "Запрос получён."
+noInternetErrorText = "Ошибка: Пожалуйста проверьте интернет соединение."
+invalidStatusCodeText = "Ошибка: Получён неправильный код ответа. [[CODE]]"
+checkingForUpdatesText = "Проверка обновлений..."
+latestVersionText = "Вы используете последнюю версию!\nОбновления не требуются."
+upgradeNeededText = "Новое обновление обнаружено: [v.[OLD] --> v.[NEW]]"
+versionNotesIntroducerText = "Заметки версии:"
+getUpdatesLinkText = "Ссылка на обновление:"
+linkToCheckText = "Вы можете сами проверить если есть обновление с этой ссылкой:"
