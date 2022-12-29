@@ -1,5 +1,5 @@
 # The Differentiation Quiz
-_The Differentiation Quiz is a game that involves simple differentiation questions generated in Python with a command-line
+_The Differentiation Quiz_ is a game that involves simple differentiation questions generated in Python with a command-line
 interface. It's a small and lightweight that can be played for fun or when you want to kill time.<br>
 
 ## Downloads and Version
