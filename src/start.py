@@ -1,34 +1,82 @@
-if __name__ == "__main__":
-    # Imports + starting exception handling (exception handler messages default to English)
+# Attempting imports
+try:
+    import colorama
+    import sys
+    import os
+    import platform
+    import readchar
+    from config_loader import Configurations
+    from lang_loader import LanguagePack
+    from main import TheDifferentiationQuiz
+    from verifier import Verifier
+    colorama.init()
+
+    clear = lambda: os.system("cls" if platform.system() == "Windows" else "clear")
+
+    configurations = Configurations(os.path.join("config", "conf.toml"))
+    language = LanguagePack(os.path.join("lang", configurations.defaults["language"]))
+
+except (ModuleNotFoundError, ImportError) as exception:
+    print(f"An error occurred while running the program:\n"
+          f"{'Could not locate a necessary module to import.' if type(exception).__name__ == 'ModuleNotFoundError' else 'Could not import a class or function.'}\n"
+          f"Exception message: {exception} [{type(exception).__name__}]\n\n"
+          f"Please reinstall the game.\n"
+          f"[LANGUAGE DEFAULTED TO ENGLISH]\n")
+    sys.exit()
+
+
+# Starts
+def safe_start():
+    # Safe start handles exceptions.
     try:
-        import colorama
-        import sys
-        import os
-        from config_loader import Configurations
-        from lang_loader import LanguagePack
-        from main import TheDifferentiationQuiz
-        colorama.init()
+        TheDifferentiationQuiz(configurations, language)  # Starts the program
+    except Exception as unprecedented_exception:
+        if platform.system() == "Windows":
+            os.system("title The Differentiation Quiz: Error")
+        section = language.section_get("exceptionHandling")
+        print("\n".join((
+            section["errorHappenedText"],
+            section["exceptionMessageText"].replace("[MSG]", str(unprecedented_exception)).replace(
+                "[EXCEPTION]", str(type(unprecedented_exception).__name__)
+            ),
+            section["pleaseReinstallText"],
+            section["pressEnterText"]
+        )))
 
-        configurations = Configurations(os.path.join("config", "conf.toml"))
-        language = LanguagePack(os.path.join("lang", configurations.defaults["language"]))
+        while True:
+            if readchar.readkey() == readchar.key.ENTER:
+                sys.exit()
 
-    except (ModuleNotFoundError, ImportError) as exception:
-        print(f"{colorama.Fore.RED}An error occurred while running the program:\n"
-              f"{'Could not locate a necessary module to import.' if type(exception).__name__ == 'ModuleNotFoundError' else 'Could not import a class or function.'}\n" 
-              f"Exception message: {exception} [{type(exception).__name__}]\n\n"
-              f"Please reinstall the game. {colorama.Style.RESET_ALL}\n"
-              f"[LANGUAGE DEFAULTED TO ENGLISH]\n")
-        sys.exit()
-
-    except Exception as exception:
-        print(f"{colorama.Fore.RED}An unusual error occurred while running the program...\n"
-              f"Exception message: {exception} [{type(exception).__name__}]\n\n"
-              f"Please reinstall the game. {colorama.Style.RESET_ALL}\n"
-              f"[LANGUAGE DEFAULTED TO ENGLISH]\n")
-        sys.exit()
-
-    try:
-        differentiation_quiz = TheDifferentiationQuiz(configurations, language)  # Starts the program
     except KeyboardInterrupt:
+        clear()
         sys.exit()
+
+
+def unsafe_start():
+    # Unsafe start crashes in an exception.
+    TheDifferentiationQuiz(configurations, language)  # Starts the program
+
+
+# Running program
+if __name__ == "__main__":
+    clear()
+    if configurations.program_data["verify_file_presence"]:
+        verification_language_section = language.section_get("fileVerification")
+        print(verification_language_section["verifyingFilesText"])
+        verification = Verifier.verify()
+        print()
+        if not verification[0]:
+            print("\n".join((
+                verification_language_section["fileMissingText"],
+                verification_language_section["errorDescriptionText"].replace("[FILE]", verification[1])
+            )))
+            sys.exit()
+        else:
+            print(verification_language_section["filesVerifiedText"])
+            clear()
+
+    if configurations.program_data["safe_start"]:
+        safe_start()
+    else:
+        unsafe_start()
 
