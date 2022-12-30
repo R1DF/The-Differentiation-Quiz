@@ -36,6 +36,7 @@ pressEnterText = "Press Enter to exit the program."
 [menus.mainMenu]
 welcomeText = "Welcome to The Differentiation Quiz."
 runningVersionText = "Running version v[VERSION]."
+ctrlCToQuitText = "Press Ctrl+C to force quit the program."
 doWhatQueryText = "Please select an option:"
 doWhatQueryChoices = [
     "Play",

@@ -36,6 +36,7 @@ pressEnterText = "Нажмите Enter чтобы выйти."
 [menus.mainMenu]
 welcomeText = "Добро пожаловать в The Differentiation Quiz."
 runningVersionText = "Версия v[VERSION]."
+ctrlCToQuitText = "Нажмите сочетание Ctrl+C чтобы сфорсировать конец программы."
 doWhatQueryText = "Выберите действие:"
 doWhatQueryChoices = [
     "Играть",
