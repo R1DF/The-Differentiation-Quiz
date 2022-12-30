@@ -37,7 +37,15 @@ class Game:
             self.questions.append(
                 Question(question_type)
             )
-            self.questions[question].generate(maximum_amount_of_terms, self.has_negative_powers)
+
+            if question_types["3"]:
+                maximum_order_for_question_type_1 = 3
+            elif question_types["2"]:
+                maximum_order_for_question_type_1 = 2
+            else:
+                maximum_order_for_question_type_1 = 1
+
+            self.questions[question].generate(maximum_amount_of_terms, self.has_negative_powers, maximum_order_for_question_type_1)
             if track_generation:
                 success(success_text)
 
