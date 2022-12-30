@@ -3,7 +3,7 @@ _The Differentiation Quiz_ is a game that involves simple differentiation questi
 interface. It's a small and lightweight that can be played for fun or when you want to kill time.<br>
 
 ## Downloads and Version
-As of X January 2023, the latest version is v`1.0.0`.<br>
+As of 31st December 2022, the latest version is v`1.0.0`.<br>
 The game is only available for Windows. Please check the Release section for downloads and instructions.<br>
 However, the game can be run on both Mac and Linux via source code.
 
