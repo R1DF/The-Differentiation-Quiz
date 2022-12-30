@@ -13,7 +13,9 @@ class Term:
         if self.coefficient == 0:
             return "0"
         elif self.power != 0:
-            return f"{'' if self.coefficient == 1 else self.coefficient}x{'^' + str(self.power) if self.power != 1 else ''}"
+            starting_coefficient_representation = \
+                '' if self.coefficient == 1 else '-' if self.coefficient == -1 else self.coefficient
+            return f"{starting_coefficient_representation}x{'^' + str(self.power) if self.power != 1 else ''}"
         else:
             return str(self.coefficient)
 
