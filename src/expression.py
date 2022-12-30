@@ -62,5 +62,5 @@ class Expression:
 
     def pseudocopy(self):
         """copy() but the Terms inside are the same as the original term. Do not use unless you know what you're doing."""
-        return Expression(self.terms)
+        return Expression([x for x in self.terms])   # Must use list comprehensions or else the list will be linked (not just elements)
 
