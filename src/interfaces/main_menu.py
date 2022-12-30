@@ -14,6 +14,7 @@ class MainMenuInterfaceCL(InterfaceCL):
     def load_interface(self):
         clear()
         print(get_language_entry(self, "welcomeText"))
+        print(get_language_entry(self, "ctrlCToQuitText"))
         print(get_language_entry(self, "runningVersionText").replace("[VERSION]", self.master.VERSION))
         break_line()
 
