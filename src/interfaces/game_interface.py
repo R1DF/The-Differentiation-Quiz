@@ -40,8 +40,8 @@ class GameInterfaceCL(InterfaceCL):
                     answers, correct_answer_index = self.scramble_answers([x.visualize() for x in question.answers])
                 case 2:
                     header = get_language_entry(self, "isCorrectQuestionText")
-                    answers = list(map(lambda x: self.yes_text if x else self.no_text, question.answers))
-                    correct_answer_index = answers.index(self.yes_text)
+                    answers = [self.yes_text, self.no_text]
+                    correct_answer_index = 0 if question.answers[0] else 1
                 case 3:
                     header = get_language_entry(self, "notationQuestionText")
                     answers, correct_answer_index = self.scramble_answers(question.answers)
