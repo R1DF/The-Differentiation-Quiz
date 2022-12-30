@@ -4,7 +4,7 @@ However, it is also possible to create your own.
 
 ## Making your own language
 Making your language is easy - Simply copy any `.toml` language file (preinstalled ones are the best option) to use as a template and
-translate all text in speech quotes to your own language. Be mindful of possible differences in grammar and context.<br><br>
+translate all text in speech quotes (that is not surrounded by square brackets as the English text will be automatically replaced) to your own language. Be mindful of possible differences in grammar and context.<br><br>
 You **must** also update its metadata at the top, as if it lacks a specific keyword then it will not be detected by the game.<br>
 Any mistake in the language file's structure could read to an error.
 
