@@ -24,18 +24,22 @@ class Question:
         modifications = []
         if self.question_type == 2:
             differentiated_expression = self.involved_expression.differentiated()  # If the list of answers has bools then a new differentiated form must be made
+
+        # This burner expression will be used to remove randomly selected terms
         burner_expression = self.answers[
             0].pseudocopy() if self.question_type == 1 else differentiated_expression.pseudocopy()
+
+        # This will create randomly selected modifiations. The burner expression is used to alter unaltered terms.
         for modification in range(maximum_modifications_amount):
             if not len(burner_expression.terms):
-                break
+                break  # If the expression is empty, stop
             term = random.choice(burner_expression.terms)
             modifications.append([
                 self.answers[0].terms.index(term) if self.question_type == 1 else differentiated_expression.terms.index(
                     term),  # Index of the term, using the correct answer as the burner is modified every rotation
-                random.randint(1, 2),  # 1 - Coefficient, 2 - Power
-                random.choice([(random.randint(-3, -1)), random.randint(1, 3)]),  # Modifier,
-                term.power
+                random.randint(1, 2),  # 1 - Alter the coefficient, 2 - Alter the power
+                random.choice([(random.randint(-3, -1)), random.randint(1, 3)]),  # Amount to increment the coefficient/power,
+                term.power  # Residue variable that is only used in some cases
             ])
             burner_expression.terms.remove(term)
         return sorted(modifications, key=lambda x: x[0])
@@ -132,10 +136,10 @@ class Question:
 
                 # Modifying wrong answers (and making them all unique)
                 modifications = [self.get_modifications()]
-                for wrong_answer_index in range(3):
-                    self.apply_modifications(modifications[-1], self.answers[wrong_answer_index + 1])
+                for wrong_answer_index in range(1, 4):
+                    self.apply_modifications(modifications[-1], self.answers[wrong_answer_index])
                     modifications.append(self.alter_modifications(modifications[-1], modifications))
-                    self.answers[wrong_answer_index + 1].clean_up()
+                    self.answers[wrong_answer_index].clean_up()
 
             case 2:  # Question type 2: Check if given derivative is correct
                 # Getting symbols
