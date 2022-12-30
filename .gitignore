@@ -2,6 +2,7 @@
 *.xml
 *.iml
 *.txt
+*.pyc
 
 # I do tests of specific game elements and you do not need to see them at all
 /src/tests.py
